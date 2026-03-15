@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>סדנת תיאטרון איקה זהר | יוצרים. חוויות. הצלחה.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #6B2FA0;
+      --red: #C0392B;
+      --green: #27AE60;
+      --yellow: #F1C40F;
+      --orange: #E67E22;
+      --bg: #FAFAF8;
+      --dark: #1a1a2e;
+      --text: #2c2c2c;
+      --light-gray: #f0ede8;
+      --card-radius: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Heebo', sans-serif; background: var(--bg); color: var(--text); direction: rtl; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+      background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
+      border-bottom: 3px solid var(--yellow);
+      padding: 12px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--purple); }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.92rem; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-3px; right:0; left:0; height:2px; background:var(--yellow); transform:scaleX(0); transform-origin:right; transition:transform .25s; }
+    .nav-links a:hover { color: var(--purple); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta { background: var(--purple) !important; color: white !important; padding: 8px 20px; border-radius: 50px; font-weight: 700 !important; transition: background 0.2s !important; }
+    .nav-cta:hover { background: var(--red) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6B2FA0 0%, #9B59B6 45%, #E74C3C 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden; padding-top: 80px;
+    }
+    .hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/svg%3E") repeat; }
+    .shape { position:absolute; border-radius:50%; opacity:0.12; animation:float 6s ease-in-out infinite; }
+    .shape-1 { width:320px; height:320px; background:var(--yellow); top:-80px; left:-80px; animation-delay:0s; }
+    .shape-2 { width:200px; height:200px; background:var(--green); bottom:8%; right:4%; animation-delay:2s; }
+    .shape-3 { width:140px; height:140px; background:white; top:30%; left:8%; animation-delay:4s; }
+    @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(5deg)} }
+
+    .hero-content { position:relative; z-index:2; max-width:800px; padding: 0 20px; }
+    .hero-badge { display:inline-block; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; font-size:0.82rem; font-weight:700; padding:6px 18px; border-radius:50px; margin-bottom:22px; letter-spacing:1px; }
+    .hero h1 { font-size:clamp(2.6rem,7vw,4.8rem); font-weight:900; color:white; line-height:1.1; margin-bottom:14px; }
+    .hero h1 .highlight { color:var(--yellow); display:block; }
+    .hero-tagline { font-size:1.2rem; color:rgba(255,255,255,0.88); font-weight:400; margin-bottom:10px; letter-spacing:2px; }
+    .hero-sub { font-size:1rem; color:rgba(255,255,255,0.78); margin-bottom:32px; line-height:1.7; }
+
+    .hero-audiences { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:30px; }
+    .aud-pill { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.35); color:white; font-size:0.8rem; font-weight:600; padding:5px 14px; border-radius:50px; }
+
+    .hero-buttons { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background:white; color:var(--purple); font-size:1rem; font-weight:800; padding:14px 34px; border-radius:50px; text-decoration:none; transition:transform .2s, box-shadow .2s; box-shadow:0 4px 20px rgba(0,0,0,0.2); }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+    .btn-secondary { background:transparent; color:white; font-size:1rem; font-weight:700; padding:14px 34px; border-radius:50px; text-decoration:none; border:2px solid rgba(255,255,255,0.6); transition:background .2s; }
+    .btn-secondary:hover { background:rgba(255,255,255,0.12); border-color:white; }
+    .hero-scroll { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.5); font-size:0.78rem; display:flex; flex-direction:column; align-items:center; gap:5px; animation:bounce 2s infinite; }
+    .hero-scroll::after { content:'↓'; font-size:1.1rem; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+
+    /* TRUST STRIP */
+    .trust-strip { background:var(--yellow); padding:13px 40px; display:flex; justify-content:center; gap:36px; flex-wrap:wrap; }
+    .trust-item { font-size:0.84rem; font-weight:700; color:var(--dark); }
+
+    /* STATS */
+    .stats-bar { background:var(--dark); padding:28px 40px; display:flex; justify-content:center; gap:60px; flex-wrap:wrap; }
+    .stat { text-align:center; color:white; }
+    .stat-number { font-size:2.2rem; font-weight:900; color:var(--yellow); line-height:1; }
+    .stat-label { font-size:0.82rem; color:rgba(255,255,255,0.6); margin-top:4px; }
+
+    /* SECTION COMMON */
+    section { padding: 90px 40px; }
+    .section-header { text-align:center; margin-bottom:52px; }
+    .section-tag { display:inline-block; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--purple); background:rgba(107,47,160,0.1); padding:5px 16px; border-radius:50px; margin-bottom:12px; }
+    .section-title { font-size:clamp(1.7rem,4vw,2.6rem); font-weight:900; color:var(--dark); margin-bottom:12px; line-height:1.15; }
+    .section-desc { font-size:1rem; color:#666; max-width:580px; margin:0 auto; line-height:1.7; }
+
+    /* AUDIENCE BLOCKS */
+    #audiences { background: white; }
+    .audience-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:24px; max-width:1100px; margin:0 auto; }
+    .audience-card { border-radius:22px; padding:36px 28px; text-align:center; transition:transform .2s, box-shadow .2s; }
+    .audience-card:hover { transform:translateY(-6px); box-shadow:0 16px 50px rgba(0,0,0,0.12); }
+    .audience-card.ac-kids { background:linear-gradient(135deg,#6B2FA0,#9B59B6); color:white; }
+    .audience-card.ac-biz { background:linear-gradient(135deg,#1a1a2e,#2c3e6b); color:white; }
+    .audience-card.ac-adults { background:linear-gradient(135deg,#C0392B,#E74C3C); color:white; }
+    .aud-icon-text { font-size:2.4rem; font-weight:900; margin-bottom:14px; display:block; letter-spacing:-1px; opacity:0.9; }
+    .aud-title { font-size:1.35rem; font-weight:900; margin-bottom:10px; }
+    .aud-desc { font-size:0.88rem; line-height:1.65; opacity:0.88; margin-bottom:20px; }
+    .aud-tags { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+    .aud-tag { background:rgba(255,255,255,0.18); font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:50px; color:white; }
+    .aud-cta { display:inline-block; margin-top:20px; background:rgba(255,255,255,0.22); color:white; font-size:0.85rem; font-weight:700; padding:9px 22px; border-radius:50px; text-decoration:none; transition:background .2s; }
+    .aud-cta:hover { background:rgba(255,255,255,0.35); }
+
+    /* ABOUT */
+    #about { background: var(--light-gray); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; max-width:1100px; margin:0 auto; align-items:center; }
+    .about-text h2 { font-size:1.9rem; font-weight:900; color:var(--dark); margin-bottom:18px; line-height:1.2; }
+    .about-text h2 em { font-style:normal; color:var(--purple); }
+    .about-text p { font-size:0.97rem; line-height:1.8; color:#555; margin-bottom:14px; }
+    .about-pillars { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:26px; }
+    .pillar { background:white; border-radius:14px; padding:16px; border-right:4px solid var(--purple); }
+    .pillar-letter { font-size:1.4rem; font-weight:900; color:var(--purple); margin-bottom:6px; }
+    .pillar-title { font-weight:700; font-size:0.9rem; color:var(--dark); margin-bottom:3px; }
+    .pillar-text { font-size:0.79rem; color:#666; line-height:1.5; }
+    .about-visual { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .about-img-block { border-radius:18px; overflow:hidden; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; color:white; font-size:1.1rem; font-weight:700; letter-spacing:1px; }
+    .about-img-block:first-child { grid-column:span 2; aspect-ratio:16/7; font-size:1.3rem; }
+    .img-placeholder-label { opacity:0.6; font-weight:400; font-size:0.85rem; }
+
+    /* WORKSHOPS */
+    #workshops { background: var(--light-gray); }
+    .tabs { display:flex; justify-content:center; gap:10px; margin-bottom:44px; flex-wrap:wrap; }
+    .tab-btn { padding:10px 26px; border-radius:50px; border:2px solid transparent; font-size:0.92rem; font-weight:700; cursor:pointer; transition:all .25s; font-family:'Heebo',sans-serif; background:white; color:#777; }
+    .tab-btn.active { background:var(--purple); color:white; border-color:var(--purple); }
+    .tab-btn:not(.active):hover { border-color:var(--purple); color:var(--purple); }
+    .tab-pane { display:none; }
+    .tab-pane.active { display:block; }
+    .workshops-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:22px; max-width:1200px; margin:0 auto; }
+    .workshop-card { background:white; border-radius:var(--card-radius); overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); transition:transform .25s, box-shadow .25s; display:flex; flex-direction:column; }
+    .workshop-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(0,0,0,0.12); }
+    .card-top { height:10px; }
+    .card-body { padding:22px; flex:1; display:flex; flex-direction:column; }
+    .card-body h3 { font-size:1.1rem; font-weight:900; color:var(--dark); margin-bottom:8px; }
+    .card-body p { font-size:0.85rem; color:#666; line-height:1.65; flex:1; margin-bottom:14px; }
+    .card-meta { display:flex; flex-wrap:wrap; gap:7px; }
+    .meta-chip { font-size:0.72rem; font-weight:600; padding:3px 10px; border-radius:50px; background:var(--light-gray); color:#555; }
+    .meta-chip.age { background:rgba(107,47,160,0.1); color:var(--purple); }
+    .meta-chip.time { background:rgba(39,174,96,0.1); color:var(--green); }
+    .meta-chip.size { background:rgba(241,196,15,0.15); color:#9a7d0a; }
+    .bar-purple { background: linear-gradient(90deg,#6B2FA0,#9B59B6); }
+    .bar-red    { background: linear-gradient(90deg,#C0392B,#E74C3C); }
+    .bar-green  { background: linear-gradient(90deg,#1E8449,#27AE60); }
+    .bar-orange { background: linear-gradient(90deg,#CA6F1E,#E67E22); }
+    .bar-blue   { background: linear-gradient(90deg,#1A5276,#2980B9); }
+    .bar-pink   { background: linear-gradient(90deg,#922B21,#E91E63); }
+    .bar-teal   { background: linear-gradient(90deg,#0E6655,#1ABC9C); }
+    .bar-yellow { background: linear-gradient(90deg,#B7950B,#D4AC0D); }
+
+    /* CONTACT */
+    #contact { background: white; }
+    .contact-wrapper { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1.3fr; gap:60px; align-items:start; }
+    .contact-info h3 { font-size:1.4rem; font-weight:900; margin-bottom:16px; color:var(--dark); }
+    .contact-info p { color:#666; line-height:1.7; margin-bottom:24px; }
+    .contact-item { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+    .contact-icon { width:44px; height:44px; border-radius:12px; background:var(--light-gray); display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:900; color:var(--purple); flex-shrink:0; }
+    .contact-detail { font-weight:600; color:var(--dark); font-size:0.97rem; }
+    .contact-detail small { display:block; font-weight:400; color:#888; font-size:0.78rem; }
+    .form-card { background:var(--light-gray); border-radius:24px; padding:36px; }
+    .form-card h3 { font-size:1.3rem; font-weight:900; color:var(--dark); margin-bottom:4px; }
+    .form-card .form-sub { color:#888; font-size:0.85rem; margin-bottom:24px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .form-group { margin-bottom:14px; }
+    .form-group label { display:block; font-size:0.82rem; font-weight:700; color:var(--dark); margin-bottom:5px; }
+    .form-group input, .form-group select, .form-group textarea { width:100%; padding:11px 14px; border:2px solid #e0ddd8; border-radius:12px; font-size:0.92rem; font-family:'Heebo',sans-serif; color:var(--dark); background:white; transition:border-color .2s; direction:rtl; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--purple); }
+    .form-group textarea { resize:vertical; min-height:90px; }
+    .submit-btn { width:100%; background:var(--purple); color:white; border:none; padding:14px; border-radius:12px; font-size:1rem; font-weight:800; font-family:'Heebo',sans-serif; cursor:pointer; transition:background .2s, transform .15s; margin-top:4px; }
+    .submit-btn:hover { background:var(--red); transform:translateY(-2px); }
+    .submit-btn:disabled { background:#aaa; cursor:not-allowed; transform:none; }
+    .success-msg { display:none; background:rgba(39,174,96,0.12); border:2px solid var(--green); border-radius:12px; padding:16px; text-align:center; color:var(--green); font-weight:700; margin-top:12px; }
+    .error-msg { display:none; background:rgba(192,57,43,0.1); border:2px solid var(--red); border-radius:12px; padding:12px; text-align:center; color:var(--red); font-size:0.88rem; margin-top:10px; }
+
+    /* FOOTER */
+    footer { background:var(--dark); color:rgba(255,255,255,0.7); text-align:center; padding:34px 20px; font-size:0.86rem; }
+    footer strong { color:white; }
+    footer a { color:var(--yellow); text-decoration:none; }
+
+    /* RESPONSIVE */
+    @media (max-width:900px) {
+      .audience-grid { grid-template-columns:1fr; max-width:480px; margin:0 auto; }
+      .about-grid { grid-template-columns:1fr; }
+      .contact-wrapper { grid-template-columns:1fr; }
+    }
+    @media (max-width:768px) {
+      nav { padding:12px 20px; }
+      .nav-links { display:none; }
+      section { padding:60px 20px; }
+      .stats-bar { gap:28px; padding:22px 20px; }
+      .form-row { grid-template-columns:1fr; }
+      .hero-buttons { flex-direction:column; align-items:center; }
+      .trust-strip { gap:16px; padding:12px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">איקה <span>זהר</span></div>
+  <ul class="nav-links">
+    <li><a href="#audiences">קהלים</a></li>
+    <li><a href="#about">אודות</a></li>
+    <li><a href="#workshops">סדנאות</a></li>
+    <li><a href="#contact" class="nav-cta">צרו קשר</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">פועלים מאז 2004 — מעל 21 שנות ניסיון</div>
+    <h1>סדנת תיאטרון<span class="highlight">איקה זהר</span></h1>
+    <p class="hero-tagline">יוצרים. חוויות. הצלחה.</p>
+    <p class="hero-sub">סדנאות מגישה לכל גיל ולכל מסגרת — ילדים, נוער, מבוגרים, קשישים, אירועי חברה וכנסים.<br/>פיתוח אישי, חיזוק צוות וכיף אמיתי דרך עולם התיאטרון.</p>
+    <div class="hero-audiences">
+      <span class="aud-pill">ילדים ונוער</span>
+      <span class="aud-pill">מבוגרים</span>
+      <span class="aud-pill">אירועי חברה</span>
+      <span class="aud-pill">מסגרות חינוך</span>
+      <span class="aud-pill">קשישים</span>
+    </div>
+    <div class="hero-buttons">
+      <a href="#workshops" class="btn-primary">לכל הסדנאות</a>
+      <a href="#contact" class="btn-secondary">לתיאום שיחה</a>
+    </div>
+  </div>
+  <div class="hero-scroll">גלול למטה</div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">סביבה בטוחה ומכילה</div>
+  <div class="trust-item">21+ שנות ניסיון</div>
+  <div class="trust-item">מדריכים מקצועיים</div>
+  <div class="trust-item">מותאם לכל גיל ומסגרת</div>
+  <div class="trust-item">מגיעים אליכם לכל הארץ</div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-number">+21</div><div class="stat-label">שנות פעילות</div></div>
+  <div class="stat"><div class="stat-number">+10</div><div class="stat-label">סוגי סדנאות</div></div>
+  <div class="stat"><div class="stat-number">כל גיל</div><div class="stat-label">ילדים עד קשישים</div></div>
+  <div class="stat"><div class="stat-number">הארץ כולה</div><div class="stat-label">מגיעים אליכם</div></div>
+</div>
+
+<!-- AUDIENCES -->
+<section id="audiences">
+  <div class="section-header">
+    <div class="section-tag">למי זה מתאים</div>
+    <h2 class="section-title">הסדנאות שלנו — לכל אחד ואחת</h2>
+    <p class="section-desc">בין אם אתם מחפשים חוויה לילד, פעילות לחברה, או פיתוח אישי — יש לנו סדנה בשבילכם</p>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-card ac-kids">
+      <span class="aud-icon-text">ילדים<br/>ונוער</span>
+      <div class="aud-title">ילדים ונוער</div>
+      <div class="aud-desc">סדנאות מהנות ומעצימות שמפתחות ביטחון עצמי, יצירתיות ותקשורת — דרך משחק, תיאטרון ואומנויות במה. מותאמות לבתי ספר, קייטנות וגני ילדים.</div>
+      <div class="aud-tags">
+        <span class="aud-tag">בתי ספר</span>
+        <span class="aud-tag">קייטנות</span>
+        <span class="aud-tag">גני ילדים</span>
+        <span class="aud-tag">ימי הולדת</span>
+      </div>
+      <a href="#workshops" class="aud-cta">לסדנאות ילדים</a>
+    </div>
+    <div class="audience-card ac-biz">
+      <span class="aud-icon-text">עסקים<br/>וארגונים</span>
+      <div class="aud-title">עסקים וארגונים</div>
+      <div class="aud-desc">אירועי חברה בלתי נשכחים, ימי גיבוש, סדנאות לחיזוק צוות, שיפור תקשורת ומנהיגות — עם הומור, יצירתיות ותוצאות אמיתיות.</div>
+      <div class="aud-tags">
+        <span class="aud-tag">גיבוש צוות</span>
+        <span class="aud-tag">ימי כיף</span>
+        <span class="aud-tag">כנסים</span>
+        <span class="aud-tag">הדרכות</span>
+      </div>
+      <a href="#workshops" class="aud-cta">לסדנאות עסקיות</a>
+    </div>
+    <div class="audience-card ac-adults">
+      <span class="aud-icon-text">מבוגרים<br/>וקשישים</span>
+      <div class="aud-title">מבוגרים וקשישים</div>
+      <div class="aud-desc">סדנאות לפיתוח אישי, ביטחון עצמי, שיפור תקשורת ועמידה מול קהל. גם הרצאות ייחודיות על תולדות התיאטרון לקהל שוחר תרבות.</div>
+      <div class="aud-tags">
+        <span class="aud-tag">פיתוח אישי</span>
+        <span class="aud-tag">הרצאות</span>
+        <span class="aud-tag">מרכזי יום</span>
+        <span class="aud-tag">קשישים</span>
+      </div>
+      <a href="#workshops" class="aud-cta">לסדנאות מבוגרים</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>הפילוסופיה שלנו — <em>תיאטרוסופיה</em></h2>
+      <p>סדנת תיאטרון איקה זהר פועלת על פי תפיסת ה"תיאטרוסופיה" — שיטה ייחודית שפיתח איקה זהר במהלך 41 שנות עבודתו כיוצר, מחנך ומנטור.</p>
+      <p>מחוץ לקופסה, עידוד היצירתיות והחשיבה, מציאת הקול האישי — שאיפה למצוינות ללא תחרות. שיתוף פעולה וטיפוח מיומנויות אישיות ובינאישיות.</p>
+      <p>בוגרי הסדנה מצאו את הקול האישי שלהם — חלקם הגיעו לבמות, לתפקידי ניהול, ולשיפור הדרמטי ביכולות תקשורת, הוראה ומנהיגות.</p>
+      <div class="about-pillars">
+        <div class="pillar"><div class="pillar-letter">יצ'</div><div class="pillar-title">יצירתיות</div><div class="pillar-text">עידוד החשיבה היצירתית והתבטאות חופשית</div></div>
+        <div class="pillar"><div class="pillar-letter">בט'</div><div class="pillar-title">ביטחון עצמי</div><div class="pillar-text">חיזוק הביטחון ושיפור יכולת השליפה</div></div>
+        <div class="pillar"><div class="pillar-letter">שת'</div><div class="pillar-title">שיתוף פעולה</div><div class="pillar-text">עבודת צוות ותקשורת בינאישית</div></div>
+        <div class="pillar"><div class="pillar-letter">מצ'</div><div class="pillar-title">מצוינות</div><div class="pillar-text">שאיפה לגדול — ללא תחרות, עם הנאה</div></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-img-block ct-purple" style="background:linear-gradient(135deg,#6B2FA0,#9B59B6)">
+        <span class="img-placeholder-label">תמונה מהסדנה</span>
+      </div>
+      <div class="about-img-block" style="background:linear-gradient(135deg,#C0392B,#E74C3C)">
+        <span class="img-placeholder-label">תמונה מהסדנה</span>
+      </div>
+      <div class="about-img-block" style="background:linear-gradient(135deg,#1E8449,#27AE60)">
+        <span class="img-placeholder-label">תמונה מהסדנה</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOPS -->
+<section id="workshops">
+  <div class="section-header">
+    <div class="section-tag">הסדנאות שלנו</div>
+    <h2 class="section-title">בחרו את הסדנה המתאימה</h2>
+    <p class="section-desc">כל הסדנאות קיימות גם כקורסים מתמשכים — צרו קשר לפרטים</p>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'children')">ילדים ונוער</button>
+    <button class="tab-btn" onclick="switchTab(this,'biz')">עסקים וארגונים</button>
+    <button class="tab-btn" onclick="switchTab(this,'adults')">מבוגרים</button>
+    <button class="tab-btn" onclick="switchTab(this,'all')">לכולם</button>
+  </div>
+
+  <!-- CHILDREN -->
+  <div class="tab-pane active" id="tab-children">
+    <div class="workshops-grid">
+      <div class="workshop-card"><div class="card-top bar-red"></div><div class="card-body"><h3>ליצן אף אדום</h3><p>שיעור ליצנות מצחיק ומעורר דמיון תוך שימוש באף אדום ובאביזרים. ניתן להתאים למבוגרים יותר.</p><div class="card-meta"><span class="meta-chip age">גיל 5–12</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-purple"></div><div class="card-body"><h3>סיפורים מהראש</h3><p>מפגש פעיל מלא הומור לעידוד החשיבה היצירתית דרך משחק חברתי מרתק והכרת מיומנויות הסיפור.</p><div class="card-meta"><span class="meta-chip age">גיל 5–12</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-yellow"></div><div class="card-body"><h3>משחקי צלילים</h3><p>מפגש מוסיקלי פעיל — משחקי הקשבה, פיתוח השמיעה המוסיקלית והיכרות עם הקשרים בין הצלילים. שירה קבוצתית.</p><div class="card-meta"><span class="meta-chip age">גיל 5–15</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-green"></div><div class="card-body"><h3>אקרובאלאנס</h3><p>התנסות נפלאה באומנויות הקרקס. חוויית הצלחה מובטחת. יש צורך במזרונים.</p><div class="card-meta"><span class="meta-chip age">גיל 5–12</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-blue"></div><div class="card-body"><h3>אימפרוביזציה</h3><p>סדנת אלתור מצחיקה המעניקה כלים לשיפור הדיאלוג, יכולת הפרזנטציה, העמידה מול קהל ומיומנויות השליפה.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45/90 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-orange"></div><div class="card-body"><h3>מוכנים? אקשן!</h3><p>התנסות חוויייתית במשחק מול מצלמה. עבודת שחקנים מקצועית בסצינת וידיאו. מתאים מגיל 8 ומעלה.</p><div class="card-meta"><span class="meta-chip age">גיל 8+</span><span class="meta-chip time">90 דקות</span><span class="meta-chip size">עד 10 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-pink"></div><div class="card-body"><h3>קרבות במה</h3><p>שיעור מאתגר ומהנה ביומנויות סיף ומכות מותאמים לבמה. מתאים לכל גיל.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 24 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-purple"></div><div class="card-body"><h3>מסכה לבנה</h3><p>מסכה לבנה מאפשרת בניית דמות ללא עזרת הבעות הפנים. חוויית הצלחה מושחררת.</p><div class="card-meta"><span class="meta-chip age">גיל 5+</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- BUSINESS -->
+  <div class="tab-pane" id="tab-biz">
+    <div class="workshops-grid">
+      <div class="workshop-card"><div class="card-top bar-blue"></div><div class="card-body"><h3>אחד מול קהל</h3><p>סדנה לחיזוק הביטחון העצמי, שיפור יכולת השליפה והתקשורת הבינאישית ותוך-ארגונית — באמצעות הומור. מצוין לאנשי מכירות, מנהלים ומרצים.</p><div class="card-meta"><span class="meta-chip age">מבוגרים</span><span class="meta-chip time">45/90 דקות</span><span class="meta-chip size">עד 24 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-purple"></div><div class="card-body"><h3>אימפרוביזציה לעסקים</h3><p>כלים מעולם האלתור לשיפור יכולת ההקשבה, גמישות מחשבתית ועבודת צוות. מחקרים מראים שאלתור משפר את היכולות המחויית והתפקודית.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45/90 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-orange"></div><div class="card-body"><h3>תיפוף גוף — גיבוש צוות</h3><p>סדנה ייחודית מלאה בקצב — מייצרת אנרגיה קבוצתית, תחושת שייכות וחוויית הצלחה משותפת. אידיאלית לימי גיבוש וכנסים.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 30 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-teal"></div><div class="card-body"><h3>ג'אגלינג — יום כיף</h3><p>פעילות קבוצתית שוברת שגרה — כולם מצליחים, כולם צוחקים. מתאים לאירועי חברה גדולים.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 16 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-green"></div><div class="card-body"><h3>מוכנים? אקשן!</h3><p>פעילות חוויייתית של משחק מול מצלמה — מצוינת לאירועי חברה, ימי הולדת לעסק ופעילויות ייחודיות.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">90 דקות</span><span class="meta-chip size">עד 10 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-red"></div><div class="card-body"><h3>קרבות במה</h3><p>פעילות מרגשת ואדרנלינית שמחברת את הצוות — שיעור ייחודי ביומנויות סיף לבמה. לא שוכחים אותה!</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 24 משתתפים</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- ADULTS -->
+  <div class="tab-pane" id="tab-adults">
+    <div class="workshops-grid">
+      <div class="workshop-card"><div class="card-top bar-purple"></div><div class="card-body"><h3>הורים משחק ילדים</h3><p>סדנה ייעודית ומלאה הומור לשיפור הדיאלוג הבינאישי בתוך המשפחה. מייצרת תקשורת חדשה, חיובית ומקדמת. מתאימה להורים — ביחד או לחוד.</p><div class="card-meta"><span class="meta-chip age">הורים</span><span class="meta-chip time">3 שעות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-red"></div><div class="card-body"><h3>אחד מול קהל</h3><p>מפגש או סדרת מפגשים לחיזוק ביטחון עצמי, שיפור יכולת השליפה והתקשורת הבינאישית באמצעות הומור.</p><div class="card-meta"><span class="meta-chip age">מבוגרים</span><span class="meta-chip time">45/90 דקות</span><span class="meta-chip size">עד 24 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-blue"></div><div class="card-body"><h3>מדיוניסוס ועד היום</h3><p>הרצאה / סדרת הרצאות על תולדות התיאטרון מהעת העתיקה ועד ימינו, מלווה בתמונות ומסרטונים. לקהל שוחר תרבות בכל הגילאים.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">ללא הגבלה</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- ALL -->
+  <div class="tab-pane" id="tab-all">
+    <div class="workshops-grid">
+      <div class="workshop-card"><div class="card-top bar-orange"></div><div class="card-body"><h3>תיפוף גוף</h3><p>סדנה ייחודית מלאה בקצב עם דגש על יצירת חוויית הצלחה לכל משתתף. מותאמת לכל גיל.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 30 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-teal"></div><div class="card-body"><h3>ג'אגלינג</h3><p>חוויית ג'אגלינג עם 3 כדורים — מתאים לכל גיל. יש להיערך עם ערכות ג'אגלינג כמספר המשתתפים.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45 דקות</span><span class="meta-chip size">עד 16 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-yellow"></div><div class="card-body"><h3>קביים</h3><p>התנסות נפלאה בהליכה על קביים. חוויית הצלחה מובטחת.</p><div class="card-meta"><span class="meta-chip age">גיל 5–12</span><span class="meta-chip time">45/90 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+      <div class="workshop-card"><div class="card-top bar-blue"></div><div class="card-body"><h3>אימפרוביזציה</h3><p>כלים מעולם האלתור לכולם — ילדים, מבוגרים, ארגונים. מצחיק, מרגש ומשנה תפיסה.</p><div class="card-meta"><span class="meta-chip age">לכל גיל</span><span class="meta-chip time">45/90 דקות</span><span class="meta-chip size">עד 20 משתתפים</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">צרו קשר</div>
+    <h2 class="section-title">נשמח לשמוע מכם</h2>
+    <p class="section-desc">לתיאום שיחה ומציאת הסדנה המתאימה לכם — פרטיים, ארגונים ומסגרות חינוך</p>
+  </div>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h3>דרכי יצירת קשר</h3>
+      <p>אנחנו כאן לענות על כל שאלה ולעזור לכם לבחור את הסדנה המתאימה ביותר.</p>
+      <div class="contact-item">
+        <div class="contact-icon">טל</div>
+        <div class="contact-detail">איקה זהר<small>0545916172</small></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">טל</div>
+        <div class="contact-detail">איתמר זהר<small>0545916174</small></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">מל</div>
+        <div class="contact-detail">דוא"ל<small>sadnaika@gmail.com</small></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">מיק</div>
+        <div class="contact-detail">מיקום<small>מגיעים אליכם לכל הארץ</small></div>
+      </div>
+    </div>
+    <div class="form-card">
+      <h3>השאירו פרטים</h3>
+      <p class="form-sub">נחזור אליכם לתיאום שיחה תוך יום עסקים</p>
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label>שם פרטי *</label><input type="text" name="firstName" placeholder="ישראל" required /></div>
+          <div class="form-group"><label>שם משפחה</label><input type="text" name="lastName" placeholder="ישראלי" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>טלפון *</label><input type="tel" name="phone" placeholder="05X-XXXXXXX" required /></div>
+          <div class="form-group"><label>דוא"ל</label><input type="email" name="email" placeholder="example@gmail.com" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>סוג פנייה</label>
+            <select name="clientType">
+              <option value="">בחרו...</option>
+              <option>הורה / פרטי</option>
+              <option>בית ספר / גן</option>
+              <option>קייטנה</option>
+              <option>עסק / ארגון</option>
+              <option>מרכז יום / קשישים</option>
+              <option>אחר</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>סדנה מבוקשת</label>
+            <select name="workshop">
+              <option value="">בחרו סדנה...</option>
+              <option>ליצן אף אדום</option>
+              <option>סיפורים מהראש</option>
+              <option>משחקי צלילים</option>
+              <option>אחד מול קהל</option>
+              <option>הורים משחק ילדים</option>
+              <option>תיפוף גוף</option>
+              <option>ג'אגלינג</option>
+              <option>קרבות במה</option>
+              <option>אימפרוביזציה</option>
+              <option>מוכנים? אקשן!</option>
+              <option>אקרובאלאנס</option>
+              <option>מסכה לבנה</option>
+              <option>מדיוניסוס ועד היום</option>
+              <option>קביים</option>
+              <option>לא בטוח — אשמח לשמוע</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>הודעה</label><textarea name="message" placeholder="ספרו לנו עוד — לכמה משתתפים? איזה גיל? תאריכים רלוונטיים?"></textarea></div>
+        <button type="submit" class="submit-btn" id="submitBtn">שליחה</button>
+      </form>
+      <div class="success-msg" id="successMsg">תודה! קיבלנו את פנייתך ונחזור אליך בהקדם.</div>
+      <div class="error-msg" id="errorMsg">אופס! משהו השתבש. נסו שוב או התקשרו ישירות.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>סדנת תיאטרון איקה זהר</strong> — יוצרים. חוויות. הצלחה.</p>
+  <p style="margin-top:8px;"><a href="tel:0545916172">0545916172</a> (איקה) &nbsp;|&nbsp; <a href="tel:0545916174">0545916174</a> (איתמר) &nbsp;|&nbsp; <a href="mailto:sadnaika@gmail.com">sadnaika@gmail.com</a></p>
+  <p style="margin-top:12px;font-size:0.78rem;opacity:0.4;">© 2025 סדנת תיאטרון איקה זהר · כל הזכויות שמורות</p>
+</footer>
+
+<script>
+  function switchTab(btn, tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+
+  const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'שולח...';
+    const form = e.target;
+    const data = {
+      firstName:  form.firstName.value,
+      lastName:   form.lastName.value,
+      phone:      form.phone.value,
+      email:      form.email.value,
+      clientType: form.clientType.value,
+      workshop:   form.workshop.value,
+      message:    form.message.value,
+      timestamp:  new Date().toLocaleString('he-IL')
+    };
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      form.style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'שליחה';
+      document.getElementById('errorMsg').style.display = 'block';
+    }
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.workshop-card, .audience-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease, box-shadow 0.25s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
